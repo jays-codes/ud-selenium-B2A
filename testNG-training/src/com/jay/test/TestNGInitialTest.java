@@ -13,4 +13,6 @@ public class TestNGInitialTest {
 	public void tcCase2() {
 		System.out.println("Test case #2");
 	}
+	
+	
 }
