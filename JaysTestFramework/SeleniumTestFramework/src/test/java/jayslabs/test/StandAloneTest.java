@@ -1,5 +1,7 @@
 package jayslabs.test;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -23,7 +25,7 @@ public class StandAloneTest extends BaseTest {
 		CartPage cp = pc.openCart();
 
 		boolean hasprod = cp.isProductAddedToCart(searchstr);
-		Assert.assertTrue(hasprod);
+		AssertJUnit.assertTrue(hasprod);
 
 		CheckoutPage cop = cp.checkout();
 		cop.selectCountry("ph");
