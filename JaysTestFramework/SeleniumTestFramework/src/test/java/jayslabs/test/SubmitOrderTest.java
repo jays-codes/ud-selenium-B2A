@@ -5,19 +5,20 @@ import org.testng.annotations.Test;
 
 import jayslabs.pageobjects.CartPage;
 import jayslabs.pageobjects.CheckoutPage;
-import jayslabs.pageobjects.LandingPage;
 import jayslabs.pageobjects.OrderConfirmedPage;
 import jayslabs.pageobjects.ProdCatalog;
 import jayslabs.test.components.BaseTest;
 
-public class SubmitOrderTest extends BaseTest{
+public class SubmitOrderTest extends BaseTest {
 
-@Test
-public void submitOrder() throws InterruptedException {
-		LandingPage lp = launchApplication();
-		ProdCatalog pc = lp.loginApplication("anshika@gmail.com", "Iamking@000");
+	@Test
+	public void submitOrder() throws InterruptedException {
 
 		String searchstr = "ZARA COAT 3";
+
+		// LandingPage lp = launchApplication();
+		ProdCatalog pc = landingPage.loginApplication("anshika@gmail.com", "Iamking@000");
+
 		pc.addProductToCart(searchstr);
 		CartPage cp = pc.openCart();
 
@@ -31,7 +32,6 @@ public void submitOrder() throws InterruptedException {
 		boolean confirmed = ocp.isConfirmedPageShowing("Thankyou for the order.");
 
 		Assert.assertTrue(confirmed);
-		// driver.close();
 	}
 
 }

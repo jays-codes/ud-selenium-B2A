@@ -8,6 +8,8 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jayslabs.pageobjects.LandingPage;
@@ -15,11 +17,12 @@ import jayslabs.pageobjects.LandingPage;
 public class BaseTest {
 
 	public WebDriver driver;
+	public LandingPage landingPage;
 
 	public WebDriver initializeDriver() {
 		Properties prop = new Properties();
 		try {
-			
+
 			String fstr = System.getProperty("user.dir") + "\\src\\main\\resources\\GlobalData.properties";
 			FileInputStream fis = new FileInputStream(fstr);
 
@@ -44,11 +47,17 @@ public class BaseTest {
 		return driver;
 	}
 
-	public LandingPage launchApplication() {
+	@BeforeMethod
+	public void launchApplication() {
 		driver = initializeDriver();
 		LandingPage lp = new LandingPage(driver);
 		lp.goTo();
-		return lp;
+		this.landingPage = lp;
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		driver.close();
 	}
 
 }
