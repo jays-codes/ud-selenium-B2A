@@ -1,4 +1,4 @@
-package jayslab.pageobjects;
+package jayslabs.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

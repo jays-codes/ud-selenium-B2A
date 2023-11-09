@@ -1,6 +1,5 @@
-package jayslab.pageobjects;
+package jayslabs.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,6 +37,5 @@ public class LandingPage extends AbstractComponent{
 
 	public void goTo() {
 		driver.get("https://rahulshettyacademy.com/client");
-		driver.manage().window().maximize();
 	}
 }

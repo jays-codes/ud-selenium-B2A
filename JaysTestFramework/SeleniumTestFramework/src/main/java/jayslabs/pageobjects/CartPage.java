@@ -1,4 +1,4 @@
-package jayslab.pageobjects;
+package jayslabs.pageobjects;
 
 import java.util.List;
 
