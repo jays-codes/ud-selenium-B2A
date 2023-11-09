@@ -42,9 +42,10 @@ public class CheckoutPage extends AbstractComponent {
 		ctrybtn.click();
 	}
 
-	public void placeOrder() {
+	public OrderConfirmedPage placeOrder() {
 		placeorderbtn.click();
 		this.waitForElementToAppear(confirmorderBy);
+		return new OrderConfirmedPage(driver);
 	}
 
 }

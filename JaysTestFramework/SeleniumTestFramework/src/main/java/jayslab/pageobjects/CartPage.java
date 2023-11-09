@@ -34,9 +34,10 @@ public class CartPage extends AbstractComponent {
 		return prodincart;
 	}
 
-	public void checkout() {
+	public CheckoutPage checkout() {
 		checkoutbtn.click();
 		this.waitForElementToAppear(countryfieldBy);
+		return new CheckoutPage(driver);
 		
 	}
 	

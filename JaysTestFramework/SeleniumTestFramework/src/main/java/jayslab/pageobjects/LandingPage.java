@@ -28,10 +28,11 @@ public class LandingPage extends AbstractComponent{
 	@FindBy(id="login")
 	WebElement submit;
 
-	public void loginApplication(String user, String pwd) {
+	public ProdCatalog loginApplication(String user, String pwd) {
 		userEmail.sendKeys(user);
 		password.sendKeys(pwd);
 		submit.click();
+		return new ProdCatalog(driver);
 		
 	}
 

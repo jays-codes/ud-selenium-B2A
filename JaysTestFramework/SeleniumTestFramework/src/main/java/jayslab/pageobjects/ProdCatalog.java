@@ -10,51 +10,41 @@ import org.openqa.selenium.support.PageFactory;
 
 import jayslabs.utils.AbstractComponent;
 
-public class ProdCatalog extends AbstractComponent{
+public class ProdCatalog extends AbstractComponent {
 	WebDriver driver;
-	
+
 	public ProdCatalog(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
-	@FindBy(css=".mb-3")
+
+	@FindBy(css = ".mb-3")
 	List<WebElement> products;
-	
-	@FindBy(css=".ng-animating")
+
+	@FindBy(css = ".ng-animating")
 	WebElement animation;
-	
-	@FindBy(css="button[routerlink='/dashboard/cart'")
-	WebElement cartbtn;
-	
+
 	By productsBy = By.cssSelector(".mb-3");
 	By addToCartBy = By.cssSelector(".card-body button:last-of-type");
 	By toastBy = By.id("toast-container");
-	
+
 	public List<WebElement> getProductList() {
-		waitForElementToAppear(productsBy);
 		return products;
 	}
-	
+
 	public WebElement getProductByName(String pname) {
-		WebElement prod = products.stream()
-		.filter(s->
-			s.findElement(By.tagName("b"))
-			.getText()
-			.equals(pname))
-		.findFirst().orElse(null);	
-		
+		WebElement prod = products.stream().filter(s -> s.findElement(By.tagName("b")).getText().equals(pname))
+				.findFirst().orElse(null);
+
 		return prod;
 	}
-	
-	public void addProductToCart(String pname) {	
+
+	public void addProductToCart(String pname) throws InterruptedException {
+		// waitForElementToAppear(productsBy);
 		getProductByName(pname).findElement(addToCartBy).click();
 		waitForElementToAppear(toastBy);
 		this.waitForElementToDisappear(animation);
 	}
-	
-	public void openCart(){
-		cartbtn.click();
-	}
+
 }
