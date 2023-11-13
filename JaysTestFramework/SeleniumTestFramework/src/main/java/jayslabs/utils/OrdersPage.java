@@ -9,6 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 
 public class OrdersPage extends AbstractComponent {
 
+	WebDriver driver;
+	
+	
 	@FindBy(css="tbody tr th")
 	List<WebElement> orderids;
 
@@ -18,7 +21,7 @@ public class OrdersPage extends AbstractComponent {
 	
 	public OrdersPage(WebDriver driver) {
 		super(driver);
-		//this.driver = driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 	

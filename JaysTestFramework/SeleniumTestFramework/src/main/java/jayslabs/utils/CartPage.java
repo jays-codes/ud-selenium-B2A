@@ -12,7 +12,7 @@ import jayslabs.pageobjects.CheckoutPage;
 
 public class CartPage extends AbstractComponent {
 
-	//WebDriver driver;
+	WebDriver driver;
 	
 	@FindBy(css=".cartSection h3")
 	List<WebElement> cartproducts;
@@ -24,7 +24,7 @@ public class CartPage extends AbstractComponent {
 	
 	public CartPage(WebDriver driver) {
 		super(driver);
-		//this.driver = driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

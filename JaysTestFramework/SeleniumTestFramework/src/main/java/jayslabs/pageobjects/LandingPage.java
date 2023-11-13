@@ -10,11 +10,11 @@ import jayslabs.utils.AbstractComponent;
 public class LandingPage extends AbstractComponent{
 
 	
-	//WebDriver driver;
+	WebDriver driver;
 	
 	public LandingPage(WebDriver driver) {
 		super(driver);
-		//this.driver = driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 	

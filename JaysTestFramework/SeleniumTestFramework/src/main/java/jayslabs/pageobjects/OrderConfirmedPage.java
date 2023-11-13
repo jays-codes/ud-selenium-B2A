@@ -13,7 +13,7 @@ import jayslabs.utils.AbstractComponent;
 
 public class OrderConfirmedPage extends AbstractComponent {
 
-	//WebDriver driver;
+	WebDriver driver;
 
 	@FindBy(css = ".hero-primary")
 	WebElement confirmedtxt;
@@ -23,7 +23,7 @@ public class OrderConfirmedPage extends AbstractComponent {
 
 	public OrderConfirmedPage(WebDriver driver) {
 		super(driver);
-		//this.driver = driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

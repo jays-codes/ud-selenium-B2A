@@ -12,9 +12,11 @@ import jayslabs.utils.AbstractComponent;
 
 public class ProdCatalog extends AbstractComponent {
 
+	WebDriver driver;
+	
 	public ProdCatalog(WebDriver driver) {
 		super(driver);
-		//this.driver = driver;
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
