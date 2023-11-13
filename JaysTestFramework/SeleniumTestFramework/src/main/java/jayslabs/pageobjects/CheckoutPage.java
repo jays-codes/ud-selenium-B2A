@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import jayslabs.utils.AbstractComponent;
 
 public class CheckoutPage extends AbstractComponent {
-	WebDriver driver;
+	//WebDriver driver;
 
 	@FindBy(css=".user__address .text-validated")
 	WebElement ctrytxt;
@@ -26,7 +26,7 @@ public class CheckoutPage extends AbstractComponent {
 	
 	public CheckoutPage(WebDriver driver) {
 		super(driver);
-		this.driver = driver;
+		//this.driver = driver;
 		PageFactory.initElements(driver, this);
 		
 		

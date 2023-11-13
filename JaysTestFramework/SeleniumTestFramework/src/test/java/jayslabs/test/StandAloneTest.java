@@ -8,11 +8,11 @@ import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import jayslabs.pageobjects.CartPage;
 import jayslabs.pageobjects.CheckoutPage;
 import jayslabs.pageobjects.OrderConfirmedPage;
 import jayslabs.pageobjects.ProdCatalog;
 import jayslabs.test.components.BaseTest;
+import jayslabs.utils.CartPage;
 import jayslabs.utils.OrdersPage;
 
 public class StandAloneTest extends BaseTest {

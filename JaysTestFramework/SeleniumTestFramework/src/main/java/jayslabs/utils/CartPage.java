@@ -1,4 +1,4 @@
-package jayslabs.pageobjects;
+package jayslabs.utils;
 
 import java.util.List;
 
@@ -8,11 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import jayslabs.utils.AbstractComponent;
+import jayslabs.pageobjects.CheckoutPage;
 
 public class CartPage extends AbstractComponent {
 
-	WebDriver driver;
+	//WebDriver driver;
 	
 	@FindBy(css=".cartSection h3")
 	List<WebElement> cartproducts;
@@ -24,7 +24,7 @@ public class CartPage extends AbstractComponent {
 	
 	public CartPage(WebDriver driver) {
 		super(driver);
-		this.driver = driver;
+		//this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

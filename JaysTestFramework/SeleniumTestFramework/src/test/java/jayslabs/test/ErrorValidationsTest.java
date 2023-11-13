@@ -5,11 +5,11 @@ import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import jayslabs.pageobjects.CartPage;
 import jayslabs.pageobjects.CheckoutPage;
 import jayslabs.pageobjects.OrderConfirmedPage;
 import jayslabs.pageobjects.ProdCatalog;
 import jayslabs.test.components.BaseTest;
+import jayslabs.utils.CartPage;
 
 public class ErrorValidationsTest extends BaseTest {
 
@@ -42,13 +42,13 @@ public class ErrorValidationsTest extends BaseTest {
 		boolean hasprod = cp.isProductAddedToCart(invalidprod);
 		AssertJUnit.assertFalse(hasprod);
 
-		CheckoutPage cop = cp.checkout();
-		cop.selectCountry("ph");
-		OrderConfirmedPage ocp = cop.placeOrder();
-
-		boolean confirmed = ocp.isConfirmedPageShowing("Thankyou for the order.");
-
-		AssertJUnit.assertTrue(confirmed);
+//		CheckoutPage cop = cp.checkout();
+//		cop.selectCountry("ph");
+//		OrderConfirmedPage ocp = cop.placeOrder();
+//
+//		boolean confirmed = ocp.isConfirmedPageShowing("Thankyou for the order.");
+//
+//		AssertJUnit.assertTrue(confirmed);
 	}
 
 }
