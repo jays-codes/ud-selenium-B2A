@@ -7,12 +7,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.security.Timestamp;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -85,6 +90,19 @@ public class BaseTest {
 					new TypeReference<List<HashMap<String, String>>>(){
 		});
 		return data;
+	}
+	
+	public String takeScreenshot() throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File src = ts.getScreenshotAs(OutputType.FILE);
+		
+		String fname = new SimpleDateFormat("yyyyMMddHHmm'.txt'").format(new Date());
+		String fstr = System.getProperty("user.dir") + "\\test-output\\screenshots\\" + fname + ".png";
+
+		
+		File dest = new File(fstr);
+		FileUtils.copyFile(src, dest);
+		return fstr;
 	}
 
 }
