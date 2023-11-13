@@ -13,7 +13,7 @@ import jayslabs.utils.CartPage;
 
 public class ErrorValidationsTest extends BaseTest {
 
-	@Test
+	@Test(groups= {"ErrorHandling"})
 	public void validateLoginError() throws InterruptedException {
 
 		String expectederr = "Incorrect email or password.";
@@ -27,7 +27,7 @@ public class ErrorValidationsTest extends BaseTest {
 		AssertJUnit.assertTrue(expectederr.equalsIgnoreCase(errmsg));
 	}
 	
-	@Test
+	@Test(groups= {"ErrorHandling"})
 	public void validateUnknownProduct() throws InterruptedException {
 
 		String searchstr = "ZARA COAT 3";

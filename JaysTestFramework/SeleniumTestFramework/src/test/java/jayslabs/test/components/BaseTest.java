@@ -48,7 +48,7 @@ public class BaseTest {
 		return driver;
 	}
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void launchApplication() {
 		driver = initializeDriver();
 		LandingPage lp = new LandingPage(driver);
@@ -56,7 +56,7 @@ public class BaseTest {
 		this.landingPage = lp;
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		driver.quit();
 		//.close();
