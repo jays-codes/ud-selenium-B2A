@@ -9,7 +9,7 @@ import jayslabs.utils.CartPage;
 
 public class ErrorValidationsTest extends BaseTest {
 
-	@Test(groups= {"ErrorHandling"})
+	@Test(groups= {"ErrorHandling"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
 	public void validateLoginError() throws InterruptedException {
 
 		String expectederr = "Incorrect email or password.";
@@ -23,7 +23,7 @@ public class ErrorValidationsTest extends BaseTest {
 		AssertJUnit.assertTrue(expectederr.equalsIgnoreCase(errmsg)); // the test. should be false
 	}
 	
-	@Test(groups= {"ErrorHandling"})
+	@Test(groups= {"ErrorHandling"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
 	public void validateUnknownProduct() throws InterruptedException {
 
 		String searchstr = "ZARA COAT 3";

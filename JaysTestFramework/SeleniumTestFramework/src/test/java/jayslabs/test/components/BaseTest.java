@@ -78,8 +78,8 @@ public class BaseTest {
 
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
-		//driver.quit();
-		driver.close();
+		driver.quit();
+		//driver.close();
 	}
 	
 	public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
@@ -102,7 +102,7 @@ public class BaseTest {
 		TakesScreenshot ts = (TakesScreenshot) driver2;
 		File src = ts.getScreenshotAs(OutputType.FILE);
 		
-		String fname = new SimpleDateFormat("yyyyMMddHHmmss'.txt'").format(new Date());
+		String fname = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		String fstr = System.getProperty("user.dir") + "\\test-output\\screenshots\\" + tcname + fname + ".png";
 
 		

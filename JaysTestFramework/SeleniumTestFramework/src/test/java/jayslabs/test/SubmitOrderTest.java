@@ -25,7 +25,7 @@ public class SubmitOrderTest extends BaseTest {
 	//String searchstr = "ZARA COAT 3";
 	List<String> orders;
 	
-	@Test(dataProvider="getData", groups= {"Purchase"})
+	@Test(dataProvider="getData", groups= {"Purchase"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
 	public void submitOrder(HashMap<String,String> input) throws InterruptedException {
 		
 		ProdCatalog pc = landingPage.loginApplication(input.get("uid"), input.get("pwd"));
@@ -45,7 +45,7 @@ public class SubmitOrderTest extends BaseTest {
 		Assert.assertTrue(confirmed);
 	}
 	
-	@Test(dependsOnMethods= {"submitOrder"})
+	@Test(dependsOnMethods= {"submitOrder"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
 	public void orderHistoryTest() {
 
 		ProdCatalog pc = landingPage.loginApplication("anshika@gmail.com", "Iamking@000");
