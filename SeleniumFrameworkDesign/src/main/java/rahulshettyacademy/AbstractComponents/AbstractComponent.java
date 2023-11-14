@@ -33,14 +33,14 @@ public class AbstractComponent {
 
 	public void waitForElementToAppear(By findBy) {
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
 
 	}
 	
 	public void waitForWebElementToAppear(WebElement findBy) {
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(findBy));
 
 	}
@@ -60,7 +60,7 @@ public class AbstractComponent {
 	}
 	public void waitForElementToDisappear(WebElement ele) throws InterruptedException
 	{
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 //		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 //		wait.until(ExpectedConditions.invisibilityOf(ele));
 

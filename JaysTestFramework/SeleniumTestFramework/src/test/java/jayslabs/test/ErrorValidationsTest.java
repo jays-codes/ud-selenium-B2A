@@ -18,9 +18,9 @@ public class ErrorValidationsTest extends BaseTest {
 		landingPage.loginApplication("anshika@gmail.com", invalidpwd);
 		String errmsg = landingPage.getErrorMsg();
 		
-		System.out.println(errmsg);
+		//System.out.println(errmsg);
 		
-		AssertJUnit.assertFalse(expectederr.equalsIgnoreCase(errmsg)); //fail the test. should be false
+		AssertJUnit.assertTrue(expectederr.equalsIgnoreCase(errmsg)); // the test. should be false
 	}
 	
 	@Test(groups= {"ErrorHandling"})
@@ -36,7 +36,7 @@ public class ErrorValidationsTest extends BaseTest {
 		CartPage cp = pc.openCart();
 
 		boolean hasprod = cp.isProductAddedToCart(invalidprod);
-		AssertJUnit.assertTrue(hasprod); //fail the test. should be false
+		AssertJUnit.assertFalse(hasprod); // the test. should be false
 
 //		CheckoutPage cop = cp.checkout();
 //		cop.selectCountry("ph");

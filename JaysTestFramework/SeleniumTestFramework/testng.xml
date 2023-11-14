@@ -15,10 +15,10 @@
 			<class name="jayslabs.test.ErrorValidationsTest" />
 		</classes>
 	</test>
-	
+
 	<!-- <test thread-count="5" name="Stand Alone Test"> <classes> <class name="jayslabs.test.StandAloneTest" 
 		/> </classes> </test> -->
-		
+
 	<listeners>
 		<listener class-name="jayslabs.test.components.Listeners"></listener>
 	</listeners>

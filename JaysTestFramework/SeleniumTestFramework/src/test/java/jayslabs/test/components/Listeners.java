@@ -19,10 +19,8 @@ public class Listeners extends BaseTest implements ITestListener{
 	ExtentReports extent = ExtentReportNG.getReportObject();
 	ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>(); //Thread safe
 	
-	
 	@Override
 	public void onTestStart(ITestResult result) {
-//		ITestListener.super.onTestStart(result);
 		test = extent.createTest(result.getMethod().getMethodName());
 		extentTest.set(test);
 	}
@@ -36,8 +34,7 @@ public class Listeners extends BaseTest implements ITestListener{
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		ITestListener.super.onTestFailure(result);
-		test.fail(result.getThrowable());
+		extentTest.get().fail(result.getThrowable());
 
 		try {
 			driver = (WebDriver) result.getTestClass()
@@ -53,7 +50,7 @@ public class Listeners extends BaseTest implements ITestListener{
 			e.printStackTrace();
 		}
 		
-		test.addScreenCaptureFromPath(fpath);
+		extentTest.get().addScreenCaptureFromPath(fpath);
 	}
 
 	@Override
@@ -65,60 +62,56 @@ public class Listeners extends BaseTest implements ITestListener{
 
 	@Override
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		ITestListener.super.onTestFailedButWithinSuccessPercentage(result);
-		test.fail(result.getThrowable());
-
-		try {
-			driver = (WebDriver) result.getTestClass()
-					.getRealClass().getField("driver").get(result.getInstance());
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			e.printStackTrace();
-		}
-		
-		String fpath="";
-		try {
-			fpath = takeScreenshot(result.getTestName(), driver);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		test.addScreenCaptureFromPath(fpath);
+//		extentTest.get().fail(result.getThrowable());
+//
+//		try {
+//			driver = (WebDriver) result.getTestClass()
+//					.getRealClass().getField("driver").get(result.getInstance());
+//		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		String fpath="";
+//		try {
+//			fpath = takeScreenshot(result.getTestName(), driver);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		extentTest.get().addScreenCaptureFromPath(fpath);
 	}
 
 	@Override
 	public void onTestFailedWithTimeout(ITestResult result) {
-		ITestListener.super.onTestFailedWithTimeout(result);
-		test.fail(result.getThrowable());
-
-		try {
-			driver = (WebDriver) result.getTestClass()
-					.getRealClass().getField("driver").get(result.getInstance());
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			e.printStackTrace();
-		}
-		
-		String fpath="";
-		try {
-			fpath = takeScreenshot(result.getTestName(), driver);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		test.addScreenCaptureFromPath(fpath);
+//		extentTest.get().fail(result.getThrowable());
+//
+//		try {
+//			driver = (WebDriver) result.getTestClass()
+//					.getRealClass().getField("driver").get(result.getInstance());
+//		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		String fpath="";
+//		try {
+//			fpath = takeScreenshot(result.getTestName(), driver);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		extentTest.get().addScreenCaptureFromPath(fpath);
 	}
 
 	@Override
 	public void onStart(ITestContext context) {
-		System.out.println("initializing driver from onStart()");
-		ITestListener.super.onStart(context);
-		initializeDriver();
+//		System.out.println("initializing driver from onStart()");
+//		initializeDriver();
 	}
 
 	@Override
 	public void onFinish(ITestContext context) {
-		ITestListener.super.onFinish(context);
 		extent.flush();
-		tearDown();
+//		tearDown();
 	}
 
 }
