@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -22,7 +23,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,6 +37,7 @@ public class BaseTest {
 
 	public WebDriver driver;
 	public LandingPage landingPage;
+	public ExtentReports extent = new ExtentReports();
 
 	public WebDriver initializeDriver() {
 		Properties prop = new Properties();
@@ -103,6 +108,30 @@ public class BaseTest {
 		File dest = new File(fstr);
 		FileUtils.copyFile(src, dest);
 		return fstr;
+	}
+	
+	@BeforeTest(alwaysRun = true)
+	public void configExtentReport() {
+		System.out.println("configuring extent reports...");
+		String fstr = System.getProperty("user.dir") + "\\test-output\\extentreports\\index.html";
+		ExtentSparkReporter reporter = new ExtentSparkReporter(fstr);
+		
+		reporter.config().setReportName("Submit Order Test Results");
+		reporter.config().setDocumentTitle("Test Results");
+		extent.attachReporter(reporter);
+		extent.setSystemInfo("Tester", "Jay M");
+	}
+	
+	public String getCurrentMethod() {
+		
+		String str = Thread.currentThread()
+	      .getStackTrace()[1].getMethodName();
+		
+//		Optional<String> name = StackWalker.getInstance()
+//				.walk(frames -> frames
+//			      .findFirst()
+//			      .map(StackWalker.StackFrame::getMethodName));
+		return str;
 	}
 
 }

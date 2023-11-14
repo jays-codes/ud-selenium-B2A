@@ -2,6 +2,9 @@ package jayslabs.test;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+
 import org.testng.AssertJUnit;
 
 import java.io.IOException;
@@ -24,7 +27,7 @@ public class SubmitOrderTest extends BaseTest {
 	
 	@Test(dataProvider="getData", groups= {"Purchase"})
 	public void submitOrder(HashMap<String,String> input) throws InterruptedException {
-
+		ExtentTest test = extent.createTest(getCurrentMethod());
 		
 		ProdCatalog pc = landingPage.loginApplication(input.get("uid"), input.get("pwd"));
 
@@ -41,10 +44,14 @@ public class SubmitOrderTest extends BaseTest {
 		boolean confirmed = ocp.isConfirmedPageShowing("Thankyou for the order.");
 		orders = ocp.getOrderIds();
 		Assert.assertTrue(confirmed);
+		test.addScreenCaptureFromBase64String(getCurrentMethod());
+		test.fail("fail");
+		extent.flush();
 	}
 	
 	@Test(dependsOnMethods= {"submitOrder"})
 	public void orderHistoryTest() {
+
 		ProdCatalog pc = landingPage.loginApplication("anshika@gmail.com", "Iamking@000");
 		OrdersPage op = pc.viewOrdersPage();
 		boolean allordersdisplayed = op.verifyOrderIsDisplayed(orders);
