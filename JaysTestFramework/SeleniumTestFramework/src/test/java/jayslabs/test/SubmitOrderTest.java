@@ -27,7 +27,6 @@ public class SubmitOrderTest extends BaseTest {
 	
 	@Test(dataProvider="getData", groups= {"Purchase"})
 	public void submitOrder(HashMap<String,String> input) throws InterruptedException {
-		ExtentTest test = extent.createTest(getCurrentMethod());
 		
 		ProdCatalog pc = landingPage.loginApplication(input.get("uid"), input.get("pwd"));
 
@@ -44,9 +43,6 @@ public class SubmitOrderTest extends BaseTest {
 		boolean confirmed = ocp.isConfirmedPageShowing("Thankyou for the order.");
 		orders = ocp.getOrderIds();
 		Assert.assertTrue(confirmed);
-		test.addScreenCaptureFromBase64String(getCurrentMethod());
-		test.fail("fail");
-		extent.flush();
 	}
 	
 	@Test(dependsOnMethods= {"submitOrder"})

@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -25,8 +24,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -35,11 +32,15 @@ import jayslabs.pageobjects.LandingPage;
 
 public class BaseTest {
 
-	public WebDriver driver;
+	public WebDriver driver = null;
 	public LandingPage landingPage;
-	public ExtentReports extent = new ExtentReports();
 
 	public WebDriver initializeDriver() {
+//		if (driver!=null) {
+//			System.out.println("driver not null...");
+//			return driver;
+//		}
+//		
 		Properties prop = new Properties();
 		try {
 
@@ -97,41 +98,16 @@ public class BaseTest {
 		return data;
 	}
 	
-	public String takeScreenshot() throws IOException {
-		TakesScreenshot ts = (TakesScreenshot) driver;
+	public String takeScreenshot(String tcname, WebDriver driver2) throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) driver2;
 		File src = ts.getScreenshotAs(OutputType.FILE);
 		
 		String fname = new SimpleDateFormat("yyyyMMddHHmm'.txt'").format(new Date());
-		String fstr = System.getProperty("user.dir") + "\\test-output\\screenshots\\" + fname + ".png";
+		String fstr = System.getProperty("user.dir") + "\\test-output\\screenshots\\" + tcname + fname + ".png";
 
 		
 		File dest = new File(fstr);
 		FileUtils.copyFile(src, dest);
 		return fstr;
 	}
-	
-	@BeforeTest(alwaysRun = true)
-	public void configExtentReport() {
-		System.out.println("configuring extent reports...");
-		String fstr = System.getProperty("user.dir") + "\\test-output\\extentreports\\index.html";
-		ExtentSparkReporter reporter = new ExtentSparkReporter(fstr);
-		
-		reporter.config().setReportName("Submit Order Test Results");
-		reporter.config().setDocumentTitle("Test Results");
-		extent.attachReporter(reporter);
-		extent.setSystemInfo("Tester", "Jay M");
-	}
-	
-	public String getCurrentMethod() {
-		
-		String str = Thread.currentThread()
-	      .getStackTrace()[1].getMethodName();
-		
-//		Optional<String> name = StackWalker.getInstance()
-//				.walk(frames -> frames
-//			      .findFirst()
-//			      .map(StackWalker.StackFrame::getMethodName));
-		return str;
-	}
-
 }

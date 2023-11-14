@@ -2,11 +2,7 @@ package jayslabs.test;
 
 import org.testng.annotations.Test;
 import org.testng.AssertJUnit;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
-import jayslabs.pageobjects.CheckoutPage;
-import jayslabs.pageobjects.OrderConfirmedPage;
 import jayslabs.pageobjects.ProdCatalog;
 import jayslabs.test.components.BaseTest;
 import jayslabs.utils.CartPage;
@@ -24,7 +20,7 @@ public class ErrorValidationsTest extends BaseTest {
 		
 		System.out.println(errmsg);
 		
-		AssertJUnit.assertTrue(expectederr.equalsIgnoreCase(errmsg));
+		AssertJUnit.assertFalse(expectederr.equalsIgnoreCase(errmsg)); //fail the test. should be false
 	}
 	
 	@Test(groups= {"ErrorHandling"})
@@ -40,7 +36,7 @@ public class ErrorValidationsTest extends BaseTest {
 		CartPage cp = pc.openCart();
 
 		boolean hasprod = cp.isProductAddedToCart(invalidprod);
-		AssertJUnit.assertFalse(hasprod);
+		AssertJUnit.assertTrue(hasprod); //fail the test. should be false
 
 //		CheckoutPage cop = cp.checkout();
 //		cop.selectCountry("ph");
