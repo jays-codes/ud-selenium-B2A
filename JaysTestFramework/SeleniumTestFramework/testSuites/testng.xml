@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="JaysLabs Tests">
-	<!-- 
-		<groups>
-		<run>
-		<include name="ErrorHandling"></include>
-		</run>
-		</groups>
-	-->
+<suite name="JaysLabs Tests" parallel="tests">
+	<!-- <groups> <run> <include name="ErrorHandling"></include> </run> </groups> -->
 
 	<test thread-count="5" name="Submit Order Test">
 		<classes>
@@ -22,7 +15,12 @@
 			<class name="jayslabs.test.ErrorValidationsTest" />
 		</classes>
 	</test>
+
 	<!-- <test thread-count="5" name="Stand Alone Test"> <classes> <class name="jayslabs.test.StandAloneTest" 
 		/> </classes> </test> -->
+
+	<listeners>
+		<listener class-name="jayslabs.test.components.Listeners"></listener>
+	</listeners>
 
 </suite><!-- JaysLabsTestSuite -->
