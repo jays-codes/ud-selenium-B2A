@@ -1,12 +1,11 @@
 
 @tag
 Feature: Purchase the order from ecommerce website
-  I want to use this template for my feature file
 
 	Background: 
 	Given I landed on Ecommerce Page
 	
-  @tag1
+  @Regression
   Scenario Outline: Positive Test of Submitting the order
     Given Logged in with user <uid> and password <pwd>
     When I add product <prodname> to Cart

@@ -55,5 +55,15 @@ public class StepDefinitionImpl extends BaseTest{
 		driver.quit();
 	}
 	
+    //Then "Incorrect email or password." message is displayed
+    @Then("{string} message is displayed")
+    public void incorrect_email_or_password_message_is_displayed(String str){
+    	String expectederr = "Incorrect email or password.";
+		String errmsg = landingPage.getErrorMsg();
+		Assert.assertTrue(expectederr.equalsIgnoreCase(errmsg));
+		driver.quit();
+    }
+    
+	
 	
 }
