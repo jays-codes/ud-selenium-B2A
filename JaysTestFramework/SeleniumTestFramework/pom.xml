@@ -41,6 +41,7 @@
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>7.14.0</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
@@ -49,7 +50,6 @@
 			<artifactId>extentreports</artifactId>
 			<version>5.1.1</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -57,7 +57,6 @@
 			<version>7.8.0</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!--
 		https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
@@ -76,7 +75,6 @@
 	</dependencies>
 
 	<profiles>
-<!-- 
 		<profile>
 			<id>Regression</id>
 			<build>
@@ -120,7 +118,7 @@
 		<profile>
 			<id>ErrorValidation</id>
 		</profile>
--->
+
 		<profile>
 			<id>CucumberTests</id>
 			<build>
@@ -132,7 +130,7 @@
 							<version>3.2.2</version>
 							<configuration>
 								<includes>
-									<include>**/TestNGRunner.java</include>
+									<include>**/TestCucumberRunnerTest.java</include>
 								</includes>
 							</configuration>
 						</plugin>
@@ -152,9 +150,15 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>3.2.2</version>
 					<configuration>
+						<!--
 						<suiteXmlFiles>
 							<suiteXmlFile>testSuites/testng.xml</suiteXmlFile>
 						</suiteXmlFiles>
+						-->
+
+						<includes>
+							<include>**/TestCucumberRunnerTest.java</include>
+						</includes>
 					</configuration>
 				</plugin>
 				<!-- clean lifecycle, see
