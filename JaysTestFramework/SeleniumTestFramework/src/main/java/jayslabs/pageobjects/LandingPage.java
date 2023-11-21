@@ -19,16 +19,16 @@ public class LandingPage extends AbstractComponent{
 	}
 	
 	@FindBy(css="[class*='flyInOut']")
-	WebElement loginError;
+	private WebElement loginError;
 	
 	@FindBy(id="userEmail")
-	WebElement userEmail;
+	private WebElement userEmail;
 	
 	@FindBy(id="userPassword")
-	WebElement password;
+	private WebElement password;
 	
 	@FindBy(id="login")
-	WebElement submit;
+	private WebElement submit;
 
 	public ProdCatalog loginApplication(String user, String pwd) {
 		userEmail.sendKeys(user);

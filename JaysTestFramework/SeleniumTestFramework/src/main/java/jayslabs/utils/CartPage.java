@@ -15,12 +15,12 @@ public class CartPage extends AbstractComponent {
 	WebDriver driver;
 	
 	@FindBy(css=".cartSection h3")
-	List<WebElement> cartproducts;
+	private List<WebElement> cartproducts;
 	
 	@FindBy(css=".totalRow button")
-	WebElement checkoutbtn;
+	private WebElement checkoutbtn;
 	
-	By countryfieldBy = By.cssSelector(".user__address .text-validated");
+	private By countryfieldBy = By.cssSelector(".user__address .text-validated");
 	
 	public CartPage(WebDriver driver) {
 		super(driver);

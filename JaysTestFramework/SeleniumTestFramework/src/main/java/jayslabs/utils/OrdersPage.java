@@ -13,10 +13,10 @@ public class OrdersPage extends AbstractComponent {
 	
 	
 	@FindBy(css="tbody tr th")
-	List<WebElement> orderids;
+	private List<WebElement> orderids;
 
 	@FindBy(css="tbody tr")
-	List<WebElement> orders;
+	private List<WebElement> orders;
 
 	
 	public OrdersPage(WebDriver driver) {

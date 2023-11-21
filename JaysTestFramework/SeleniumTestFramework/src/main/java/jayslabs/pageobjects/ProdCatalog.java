@@ -21,14 +21,14 @@ public class ProdCatalog extends AbstractComponent {
 	}
 
 	@FindBy(css = ".mb-3")
-	List<WebElement> products;
+	private List<WebElement> products;
 
 	@FindBy(css = ".ng-animating")
-	WebElement animation;
+	private WebElement animation;
 
-	By productsBy = By.cssSelector(".mb-3");
-	By addToCartBy = By.cssSelector(".card-body button:last-of-type");
-	By toastBy = By.id("toast-container");
+	private By productsBy = By.cssSelector(".mb-3");
+	private By addToCartBy = By.cssSelector(".card-body button:last-of-type");
+	private By toastBy = By.id("toast-container");
 
 	public List<WebElement> getProductList() {
 		return products;

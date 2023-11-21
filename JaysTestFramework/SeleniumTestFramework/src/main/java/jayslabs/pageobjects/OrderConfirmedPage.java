@@ -16,10 +16,10 @@ public class OrderConfirmedPage extends AbstractComponent {
 	WebDriver driver;
 
 	@FindBy(css = ".hero-primary")
-	WebElement confirmedtxt;
+	private WebElement confirmedtxt;
 
 	@FindBy(css = "label[class='ng-star-inserted']")
-	List<WebElement> orderIds;
+	private List<WebElement> orderIds;
 
 	public OrderConfirmedPage(WebDriver driver) {
 		super(driver);

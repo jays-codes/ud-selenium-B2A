@@ -13,16 +13,16 @@ public class CheckoutPage extends AbstractComponent {
 	WebDriver driver;
 
 	@FindBy(css=".user__address .text-validated")
-	WebElement ctrytxt;
+	private WebElement ctrytxt;
 	
 	@FindBy(css=".ta-results button")
-	WebElement ctrybtn;
+	private WebElement ctrybtn;
 	
 	@FindBy(css=".btnn")
-	WebElement placeorderbtn;
+	private WebElement placeorderbtn;
 	
-	By resultsbtnBy = By.cssSelector(".ta-results button");
-	By confirmorderBy = By.cssSelector(".hero-primary");
+	private By resultsbtnBy = By.cssSelector(".ta-results button");
+	private By confirmorderBy = By.cssSelector(".hero-primary");
 	
 	public CheckoutPage(WebDriver driver) {
 		super(driver);
@@ -46,6 +46,30 @@ public class CheckoutPage extends AbstractComponent {
 		placeorderbtn.click();
 		this.waitForElementToAppear(confirmorderBy);
 		return new OrderConfirmedPage(driver);
+	}
+
+	private WebElement getCtrytxt() {
+		return ctrytxt;
+	}
+
+	private void setCtrytxt(WebElement ctrytxt) {
+		this.ctrytxt = ctrytxt;
+	}
+
+	private WebElement getCtrybtn() {
+		return ctrybtn;
+	}
+
+	private void setCtrybtn(WebElement ctrybtn) {
+		this.ctrybtn = ctrybtn;
+	}
+
+	private WebElement getPlaceorderbtn() {
+		return placeorderbtn;
+	}
+
+	private void setPlaceorderbtn(WebElement placeorderbtn) {
+		this.placeorderbtn = placeorderbtn;
 	}
 
 }
