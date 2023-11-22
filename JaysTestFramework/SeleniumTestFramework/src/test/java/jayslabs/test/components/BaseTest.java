@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.Timestamp;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -47,6 +50,8 @@ public class BaseTest {
 
 	public WebDriver initializeDriver() throws IOException {
 
+		URL selserver = new URL("http://192.168.68.67:4444");
+		
 		Properties prop = new Properties();
 
 		String fstr = System.getProperty("user.dir") + "\\src\\main\\resources\\GlobalData.properties";
@@ -62,7 +67,10 @@ public class BaseTest {
 			ChromeOptions opts = new ChromeOptions();
 			WebDriverManager.chromedriver().setup();
 
-			driver = new ChromeDriver(opts);
+			//driver = new ChromeDriver(opts);
+			//DesiredCapabilities caps = new DesiredCapabilities();
+			//caps.setBrowserName("chrome");
+			driver = new RemoteWebDriver(selserver, opts);
 			driver.manage().window().setSize(new Dimension(1440, 900));
 		}
 
@@ -71,7 +79,8 @@ public class BaseTest {
 			WebDriverManager.chromedriver().setup();
 			System.out.println("Running in Headless mode");
 			opts.addArguments("--headless=new");
-			driver = new ChromeDriver(opts);
+			driver = new RemoteWebDriver(selserver, opts);
+			//driver = new ChromeDriver(opts);
 			driver.manage().window().setSize(new Dimension(1440, 900));
 		}
 
