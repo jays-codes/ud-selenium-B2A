@@ -13,10 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonDataReader {
 
-	public JsonDataReader() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	public List<HashMap<String, String>> getJsonDataToMap() throws IOException {
 		
 		String fstr = System.getProperty("user.dir") + "\\src\\test\\java\\jayslabs\\test\\data\\PurchaseOrder.json";

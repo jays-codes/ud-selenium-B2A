@@ -25,7 +25,7 @@ public class SubmitOrderTest extends BaseTest {
 	//String searchstr = "ZARA COAT 3";
 	List<String> orders;
 	
-	@Test(dataProvider="getData", groups= {"Purchase"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
+	@Test(dataProvider="getxlsData", groups= {"Purchase"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
 	public void submitOrder(HashMap<String,String> input) throws InterruptedException {
 		
 		ProdCatalog pc = landingPage.loginApplication(input.get("uid"), input.get("pwd"));
@@ -63,5 +63,15 @@ public class SubmitOrderTest extends BaseTest {
 		List<HashMap<String, String>> datamap = getJsonDataToMap(fstr);
 		return datamap.stream().map(s-> new Object[] {s}).toArray(Object[][]::new);
 	}
+	
+	@DataProvider
+	public Object[][] getxlsData() throws IOException {
+		System.out.println("inside getxlsdata...");
+		String fstr = System.getProperty("user.dir") + "\\src\\main\\resources\\seleniumTestData.xlsx";
+
+		List<HashMap<String, String>> datamap = getxlsDataToMap(fstr, "2022");
+		return datamap.stream().map(s-> new Object[] {s}).toArray(Object[][]::new);
+	}
+	
 	
 }

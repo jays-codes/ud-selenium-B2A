@@ -7,14 +7,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.NumberToTextConverter;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -102,6 +110,40 @@ public class BaseTest {
 				new TypeReference<List<HashMap<String, String>>>() {
 				});
 		return data;
+	}
+
+	public List<HashMap<String, String>> getxlsDataToMap(String filepath, String xlstab) throws IOException {
+		Properties prop = new Properties();
+		ArrayList<String> testdata = new ArrayList<String>();
+
+		HashMap<String, String> datamap = new HashMap<String, String>();
+		List<HashMap<String, String>> maplist = new ArrayList<HashMap<String, String>>();
+
+		FileInputStream fis = new FileInputStream(filepath);
+
+		XSSFWorkbook wrkbk = new XSSFWorkbook(fis);
+		XSSFSheet sheet = wrkbk.getSheet(xlstab);
+
+		// skip header row and iterate from 2nd
+
+		Iterator<Row> rows = sheet.iterator();
+		Row headerrow = rows.next();
+		Row dataset;
+		String key = "";
+		String val = "";
+		while (rows.hasNext()) {
+			dataset = rows.next();
+
+			int i = 0;
+			while (i < headerrow.getLastCellNum()) {
+				key = headerrow.getCell(i).getStringCellValue();
+				val = dataset.getCell(i).getStringCellValue();
+				datamap.put(key, val);
+				i++;
+			}
+			maplist.add(datamap);
+		}
+		return maplist;
 	}
 
 	public String takeScreenshot(String tcname, WebDriver driver2) throws IOException {
