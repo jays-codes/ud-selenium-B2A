@@ -10,4 +10,5 @@ For recruiters, pls. refer to the project folder: JaysTestFramework/SeleniumTest
 - integrated automated test retry (TestNG)
 - Integration with Selenium Grid - Setting up Hub, Nodes, using RemoteWebDriver
 - TestSuite execution via Maven profiles, Jenkins
+- DataProvider integration via JDBC querying from mysql
 
