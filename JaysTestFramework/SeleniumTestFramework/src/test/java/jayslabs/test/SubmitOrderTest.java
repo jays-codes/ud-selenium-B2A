@@ -8,6 +8,7 @@ import com.aventstack.extentreports.ExtentTest;
 import org.testng.AssertJUnit;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class SubmitOrderTest extends BaseTest {
 	//String searchstr = "ZARA COAT 3";
 	List<String> orders;
 	
-	@Test(dataProvider="getxlsData", groups= {"Purchase"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
+	@Test(dataProvider="getJDBCData", groups= {"Purchase"}, retryAnalyzer=jayslabs.test.components.Retrier.class)
 	public void submitOrder(HashMap<String,String> input) throws InterruptedException {
 		
 		ProdCatalog pc = landingPage.loginApplication(input.get("uid"), input.get("pwd"));
@@ -57,6 +58,7 @@ public class SubmitOrderTest extends BaseTest {
 	
 	@DataProvider
 	public Object[][] getData() throws IOException {
+		System.out.println("inside getjsondata...");
 		
 		String fstr = System.getProperty("user.dir") + "\\src\\test\\java\\jayslabs\\test\\data\\PurchaseOrder.json";
 
@@ -73,5 +75,12 @@ public class SubmitOrderTest extends BaseTest {
 		return datamap.stream().map(s-> new Object[] {s}).toArray(Object[][]::new);
 	}
 	
+	@DataProvider
+	public Object[][] getJDBCData() throws IOException, SQLException {
+		System.out.println("inside getJDBCdata...");
+
+		List<HashMap<String, String>> datamap = getJDBCDataToMap();
+		return datamap.stream().map(s-> new Object[] {s}).toArray(Object[][]::new);
+	}
 	
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.Timestamp;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -42,6 +43,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jayslabs.pageobjects.LandingPage;
+import jayslabs.test.data.JDBCUtil;
 
 public class BaseTest {
 
@@ -50,7 +52,7 @@ public class BaseTest {
 
 	public WebDriver initializeDriver() throws IOException {
 
-		URL selserver = new URL("http://192.168.68.67:4444");
+		URL selserver = new URL("http://192.168.68.61:4444");
 		
 		Properties prop = new Properties();
 
@@ -109,6 +111,13 @@ public class BaseTest {
 		// driver.close();
 	}
 
+	public List<HashMap<String, String>> getJDBCDataToMap() throws IOException, SQLException {
+
+		List<HashMap<String, String>> data = (new JDBCUtil()).getDBdata(); 
+		return data;
+	}
+	
+	
 	public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
 
 		String jsonstr = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
@@ -122,8 +131,6 @@ public class BaseTest {
 	}
 
 	public List<HashMap<String, String>> getxlsDataToMap(String filepath, String xlstab) throws IOException {
-		Properties prop = new Properties();
-		ArrayList<String> testdata = new ArrayList<String>();
 
 		HashMap<String, String> datamap = new HashMap<String, String>();
 		List<HashMap<String, String>> maplist = new ArrayList<HashMap<String, String>>();
