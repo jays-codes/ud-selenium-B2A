@@ -72,6 +72,8 @@ public class BaseTest {
 			//driver = new ChromeDriver(opts);
 			//DesiredCapabilities caps = new DesiredCapabilities();
 			//caps.setBrowserName("chrome");
+			
+			//uses selenium grid
 			driver = new RemoteWebDriver(selserver, opts);
 			driver.manage().window().setSize(new Dimension(1440, 900));
 		}
