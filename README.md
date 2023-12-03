@@ -6,9 +6,13 @@ For recruiters, pls. refer to the project folder: JaysTestFramework/SeleniumTest
 - TestNG API
 - Cucumber API, StepDefinition integration with Existing Page Objects, Feature files written in Gherkin
 - Parallel Execution, Headless Execution
-- DataProvider integration with JSON data (using Jackson API) and xls data (using Apache POI)
+- DataProvider integration with JSON data (using Jackson API)
+- DataProvider integration with xls data (using Apache POI)
 - integrated automated test retry (TestNG)
 - Integration with Selenium Grid - Setting up Hub, Nodes, using RemoteWebDriver
 - TestSuite execution via Maven profiles, Jenkins
 - DataProvider integration via JDBC querying from mysql
-
+- ChromeDevtoolsProtocol
+  - simulating browser in mobile (Emulation)
+  - Localization Testing (via Emulation.setGeolocationOverride and ChromeOptions '--lang')
+  - logging/tracking Network request, and resp codes via listeners (Network)
