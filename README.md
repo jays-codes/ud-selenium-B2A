@@ -16,3 +16,4 @@ For recruiters, pls. refer to the project folder: JaysTestFramework/SeleniumTest
   - simulating browser in mobile (Emulation)
   - Localization Testing (via Emulation.setGeolocationOverride and ChromeOptions '--lang')
   - logging/tracking Network request, and resp codes via listeners (Network)
+  - intercept network req and modify it as per test scenario
