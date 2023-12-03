@@ -7,6 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v119.fetch.Fetch;
 import org.openqa.selenium.devtools.v119.network.Network;
 import org.openqa.selenium.devtools.v119.network.model.Request;
 import org.openqa.selenium.devtools.v119.network.model.Response;
@@ -40,19 +41,36 @@ public class S222NetworkActivity {
 						System.out.println("rs url: " + res.getUrl() 
 						+ " is failing with status code: " + res.getStatus());
 						
-					}
+					} 
 				}
 		);
+
+		dtools.send(Fetch.enable(Optional.empty(), Optional.empty()));
+		dtools.addListener(Fetch.requestPaused(), request -> {
+			Request rq = request.getRequest();
+			if (rq.getUrl().contains("shetty")) {
+				String nurl = rq.getUrl().replace("=shetty", "=BadGuy");
+				System.out.println("new url: " + nurl);
+				dtools.send(
+						Fetch.continueRequest(request.getRequestId(), Optional.of(nurl), 
+								Optional.of(rq.getMethod()), 
+								Optional.empty(), Optional.empty(), Optional.empty())		
+				);
+			} else {
+				dtools.send(
+						Fetch.continueRequest(request.getRequestId(), Optional.of(rq.getUrl()), 
+								Optional.of(rq.getMethod()), 
+								Optional.empty(), Optional.empty(), Optional.empty())		
+				);
+				
+			}
+		});
 		
 		driver.get("https://rahulshettyacademy.com/angularAppdemo/");
 		driver.findElement(By.linkText("Library")).click();
 		
-
-//		Thread.sleep(1000);
-//		driver.findElements(By.cssSelector("h3.LC20lb")).get(0).click();
-//		
-//		String titleString = driver.findElement(By.tagName("h1")).getText();
-//		System.out.println("page text:" + titleString);
+		
+		//mock network response - use Fetch cdp domain
 	}
 	
 
