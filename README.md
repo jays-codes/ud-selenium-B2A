@@ -22,3 +22,5 @@ For recruiters, pls. refer to the project folder: JaysTestFramework/SeleniumTest
   - simulated network conditions, connection types
 - used selenium HasAuthentication and UsernameAndPaswword to perform basic auth
 - integrated selenium logging (LogEntries, etc.) to testNG listener
+- integrated browserstack (cloud) to test framework in multiple browsers
+  - jenkins -> maven (profile -> testng suite (-> selenium)) -> browserstack 
