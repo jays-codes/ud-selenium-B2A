@@ -26,6 +26,7 @@ import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -53,6 +54,7 @@ public class BaseTest {
 	public WebDriver initializeDriver() throws IOException {
 
 		URL selserver = new URL("http://192.168.68.61:4444");
+		URL bstkurl = new URL("https://hub.browserstack.com/wd/hub");
 		
 		Properties prop = new Properties();
 
@@ -76,7 +78,19 @@ public class BaseTest {
 			//uses selenium grid
 			driver = new RemoteWebDriver(selserver, opts);
 			driver.manage().window().setSize(new Dimension(1440, 900));
+		} 		
+		
+		else if (browsername.equalsIgnoreCase("browserstack")) {
+//			ChromeOptions opts = new ChromeOptions();
+//			WebDriverManager.chromedriver().setup();
+			
+			//uses browser stack free acct
+			System.out.println("Using browserstack...");
+			MutableCapabilities capas = new MutableCapabilities();
+			driver = new RemoteWebDriver(bstkurl, capas);
+			driver.manage().window().setSize(new Dimension(1440, 900));
 		}
+
 
 		else if (browsername.contains("headless")) {
 			ChromeOptions opts = new ChromeOptions();
