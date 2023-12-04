@@ -1,6 +1,8 @@
 package jayslabs.tester;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
@@ -14,6 +16,8 @@ import org.openqa.selenium.devtools.v119.network.model.ErrorReason;
 import org.openqa.selenium.devtools.v119.network.model.Request;
 import org.openqa.selenium.devtools.v119.fetch.model.RequestPattern;
 import org.openqa.selenium.devtools.v119.network.model.Response;
+
+import com.google.common.collect.ImmutableList;
 
 public class S222NetworkActivity {
 
@@ -72,6 +76,7 @@ public class S222NetworkActivity {
 		});
 		 */
 
+		/*
 		//fail the request
 			//use a pattern on *GetBook*
 		RequestPattern rp = new RequestPattern(
@@ -85,9 +90,17 @@ public class S222NetworkActivity {
 					request.getRequestId(), ErrorReason.FAILED));
 		
 		});
+		*/
+		
+		//block request calls
+		dtools.send(Network.setBlockedURLs(ImmutableList.of("*.jpg", "*.css")));
+		
 		
 		driver.get("https://rahulshettyacademy.com/angularAppdemo/");
-		driver.findElement(By.linkText("Library")).click();
+		driver.findElement(By.linkText("Browse Products")).click();
+		driver.findElement(By.linkText("Selenium")).click();
+		driver.findElement(By.cssSelector(".add-to-cart")).click();
+		System.out.println(driver.findElement(By.cssSelector("p")).getText());
 		Thread.sleep(3000);
 		
 	}
