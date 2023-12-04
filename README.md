@@ -20,3 +20,4 @@ For recruiters, pls. refer to the project folder: JaysTestFramework/SeleniumTest
   - use an urlpattern and explicitly fail request via Fetch.failRequest
   - blocking unwanted network calls, speeding up execution
   - simulated network conditions, connection types
+- used selenium HasAuthentication and UsernameAndPaswword to perform basic auth
