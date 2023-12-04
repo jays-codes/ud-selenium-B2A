@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v119.fetch.Fetch;
 import org.openqa.selenium.devtools.v119.network.Network;
+import org.openqa.selenium.devtools.v119.network.model.ConnectionType;
 import org.openqa.selenium.devtools.v119.network.model.ErrorReason;
 import org.openqa.selenium.devtools.v119.network.model.Request;
 import org.openqa.selenium.devtools.v119.fetch.model.RequestPattern;
@@ -49,6 +50,13 @@ public class S222NetworkActivity {
 						+ " is failing with status code: " + res.getStatus());
 						
 					} 
+				}
+		);
+		
+		dtools.addListener(Network.loadingFailed(), 
+				loadingFailed -> {
+					System.out.println(loadingFailed.getErrorText());
+					System.out.println(loadingFailed.getTimestamp());
 				}
 		);
 
@@ -93,7 +101,13 @@ public class S222NetworkActivity {
 		*/
 		
 		//block request calls
-		dtools.send(Network.setBlockedURLs(ImmutableList.of("*.jpg", "*.css")));
+		//dtools.send(Network.setBlockedURLs(ImmutableList.of("*.jpg", "*.css")));
+
+		
+		//simulate network conditions
+		dtools.send(Network.emulateNetworkConditions(
+				true, 3000, 20000, 100000, Optional.of(ConnectionType.ETHERNET)));
+
 		
 		
 		driver.get("https://rahulshettyacademy.com/angularAppdemo/");
@@ -102,6 +116,7 @@ public class S222NetworkActivity {
 		driver.findElement(By.cssSelector(".add-to-cart")).click();
 		System.out.println(driver.findElement(By.cssSelector("p")).getText());
 		Thread.sleep(3000);
+		
 		
 	}
 	
