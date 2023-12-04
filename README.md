@@ -18,4 +18,5 @@ For recruiters, pls. refer to the project folder: JaysTestFramework/SeleniumTest
   - logging/tracking Network request, and resp codes via listeners (Network)
   - intercept network req and modify it as per test scenario
   - use an urlpattern and explicitly fail request via Fetch.failRequest
-  - block unwanted network calls, speeding up execution
+  - blocking unwanted network calls, speeding up execution
+  - simulated network conditions, connection types
