@@ -1,11 +1,15 @@
 package jayslabs.test.components;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -34,8 +38,20 @@ public class Listeners extends BaseTest implements ITestListener{
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		extentTest.get().fail(result.getThrowable());
 
+		//line below should be implemented in Listeners
+		LogEntries entries = driver.manage().logs().get(LogType.BROWSER);
+		List<LogEntry> logs = entries.getAll();
+		
+		//below line should instead be sent to log4j
+		String errprint = "";
+		logs.stream().forEach(log -> errprint.concat("\n" + log.getMessage()));
+
+		extentTest.get().fail("Throwable info: " + result.getThrowable() + 
+				"\n\nSelenium logs:" + errprint);
+
+		
+		
 		try {
 			driver = (WebDriver) result.getTestClass()
 					.getRealClass().getField("driver").get(result.getInstance());
@@ -51,6 +67,7 @@ public class Listeners extends BaseTest implements ITestListener{
 		}
 		
 		extentTest.get().addScreenCaptureFromPath(fpath);
+		extentTest.get().fail(fpath)
 	}
 
 	@Override
