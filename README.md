@@ -21,3 +21,4 @@ For recruiters, pls. refer to the project folder: JaysTestFramework/SeleniumTest
   - blocking unwanted network calls, speeding up execution
   - simulated network conditions, connection types
 - used selenium HasAuthentication and UsernameAndPaswword to perform basic auth
+- integrated selenium logging (LogEntries, etc.) to testNG listener
