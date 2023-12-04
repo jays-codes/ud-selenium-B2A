@@ -67,7 +67,6 @@ public class Listeners extends BaseTest implements ITestListener{
 		}
 		
 		extentTest.get().addScreenCaptureFromPath(fpath);
-		extentTest.get().fail(fpath)
 	}
 
 	@Override
