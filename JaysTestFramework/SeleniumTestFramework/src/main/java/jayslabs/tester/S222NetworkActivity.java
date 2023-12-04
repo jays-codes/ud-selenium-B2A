@@ -1,5 +1,6 @@
 package jayslabs.tester;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import org.openqa.selenium.By;
@@ -9,7 +10,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v119.fetch.Fetch;
 import org.openqa.selenium.devtools.v119.network.Network;
+import org.openqa.selenium.devtools.v119.network.model.ErrorReason;
 import org.openqa.selenium.devtools.v119.network.model.Request;
+import org.openqa.selenium.devtools.v119.fetch.model.RequestPattern;
 import org.openqa.selenium.devtools.v119.network.model.Response;
 
 public class S222NetworkActivity {
@@ -45,6 +48,8 @@ public class S222NetworkActivity {
 				}
 		);
 
+		//mock network response - use Fetch cdp domain
+		/*
 		dtools.send(Fetch.enable(Optional.empty(), Optional.empty()));
 		dtools.addListener(Fetch.requestPaused(), request -> {
 			Request rq = request.getRequest();
@@ -65,12 +70,26 @@ public class S222NetworkActivity {
 				
 			}
 		});
+		 */
+
+		//fail the request
+			//use a pattern on *GetBook*
+		RequestPattern rp = new RequestPattern(
+				Optional.of("*GetBook*"), 
+				Optional.empty(), 
+				Optional.empty());
+		dtools.send(Fetch.enable(Optional.of(Arrays.asList(rp)), Optional.empty()));
+
+		dtools.addListener(Fetch.requestPaused(), request -> {
+			dtools.send(Fetch.failRequest(
+					request.getRequestId(), ErrorReason.FAILED));
+		
+		});
 		
 		driver.get("https://rahulshettyacademy.com/angularAppdemo/");
 		driver.findElement(By.linkText("Library")).click();
+		Thread.sleep(3000);
 		
-		
-		//mock network response - use Fetch cdp domain
 	}
 	
 
